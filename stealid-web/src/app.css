@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.primary-container {
+		@apply container mx-auto max-w-screen-lg px-2;
+	}
+}
