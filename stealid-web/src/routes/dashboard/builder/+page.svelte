@@ -15,17 +15,20 @@
 		{
 			accessorKey: 'id',
 			header: 'ID',
-			cell: (info) => info.getValue()
+			cell: (info) => info.getValue(),
+			size: 64
 		},
 		{
 			accessorKey: 'status',
 			header: 'STATUS',
-			cell: (info) => info.getValue<string>().toUpperCase()
+			cell: (info) => info.getValue<string>().toUpperCase(),
+			size: 24
 		},
 		{
 			id: 'download',
 			header: 'DOWNLOAD',
-			cell: () => flexRender(DownloadBtn, {})
+			cell: (info) => flexRender(DownloadBtn, { buildID: info.row.getValue('id') }),
+			size: 24
 		}
 	];
 
@@ -43,7 +46,7 @@
 	<h2 class="text-3xl font-bold py-6">Builder</h2>
 
 	<section>
-		<form class="flex justify-between" method="POST">
+		<form class="flex justify-between" method="POST" action="?/build">
 			<div class="flex items-center">
 				<input
 					type="text"
@@ -61,12 +64,12 @@
 			</button>
 		</form>
 
-		<table class="w-full bg-neutral-800 rounded mt-3 font-mono table-fixed">
+		<table class="bg-neutral-800 rounded mt-3 font-mono">
 			<thead>
 				{#each $table.getHeaderGroups() as headerGroup}
 					<tr>
 						{#each headerGroup.headers as header}
-							<th class="uppercase font-normal text-sm text-left p-2">
+							<th class="uppercase font-normal text-sm text-left p-2 w-{header.getSize()}">
 								{#if !header.isPlaceholder}
 									<svelte:component
 										this={flexRender(header.column.columnDef.header, header.getContext())}
@@ -81,7 +84,7 @@
 				{#each $table.getRowModel().rows as row}
 					<tr>
 						{#each row.getVisibleCells() as cell}
-							<td class="p-2 text-base">
+							<td class="p-2 text-base w-{cell.column.getSize()}">
 								<svelte:component
 									this={flexRender(cell.column.columnDef.cell, cell.getContext())}
 								/>

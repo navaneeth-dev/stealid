@@ -1,8 +1,20 @@
 import type { Actions, PageServerLoad } from './$types';
 
 export const actions = {
-	default: async (event) => {
+	build: async (event) => {
 		await event.locals.pb.collection('builds').create({ user: event.locals.user?.id });
+	},
+	download: async (event) => {
+		const data = await event.request.formData();
+		const buildID = data.get('buildID');
+		console.log(buildID);
+		const record = await event.locals.pb.collection('builds').getOne(buildID);
+		// const fileToken = await event.locals.pb.files.getToken();
+		// console.log(fileToken);
+		// const url = event.locals.pb.files.getUrl(record, record.myPrivateFile, { token: fileToken });
+		// return {
+		// 	url
+		// };
 	}
 } satisfies Actions;
 
