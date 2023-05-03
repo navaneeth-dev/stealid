@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Box from '$lib/components/box.svelte';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 	import {
 		createSvelteTable,
 		getCoreRowModel,
@@ -33,6 +33,7 @@
 	];
 
 	export let data: PageData;
+	export let form: ActionData;
 	const options: TableOptions<Build> = {
 		data: data.builds,
 		columns: defaultColumns,
@@ -44,6 +45,10 @@
 
 <div class="primary-container">
 	<h2 class="text-3xl font-bold py-6">Builder</h2>
+
+	{#if form?.url}
+		<a href={form.url} class="underline">Download</a>
+	{/if}
 
 	<section>
 		<form class="flex justify-between" method="POST" action="?/build">

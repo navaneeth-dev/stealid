@@ -12,7 +12,7 @@ export const actions = {
 
 		const fileToken = await event.locals.pb.files.getToken();
 		console.log(fileToken);
-		const url = event.locals.pb.files.getUrl(record, record.myPrivateFile, { token: fileToken });
+		const url = event.locals.pb.files.getUrl(record, record.implant, { token: fileToken });
 		return {
 			url
 		};
