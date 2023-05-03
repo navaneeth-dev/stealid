@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Box from '$lib/components/box.svelte';
 	import type { PageData } from './$types';
-	import { format } from 'date-fns';
 	import {
 		createSvelteTable,
 		getCoreRowModel,
@@ -10,19 +9,23 @@
 		type TableOptions
 	} from '@tanstack/svelte-table';
 	import type { Build } from './+page.server';
-	import Country from '$lib/components/country.svelte';
-	import View from '$lib/components/view.svelte';
+	import DownloadBtn from '$lib/components/download.svelte';
 
 	const defaultColumns: ColumnDef<Build>[] = [
 		{
 			accessorKey: 'id',
 			header: 'ID',
 			cell: (info) => info.getValue()
+		},
+		{
+			id: 'download',
+			header: 'Download',
+			cell: () => flexRender(DownloadBtn, {})
 		}
 	];
 
 	export let data: PageData;
-	const options: TableOptions<Bot> = {
+	const options: TableOptions<Build> = {
 		data: data.builds,
 		columns: defaultColumns,
 		getCoreRowModel: getCoreRowModel()
