@@ -8,6 +8,9 @@ export const actions = {
 
 export interface Build {
 	id: string;
+	created: string;
+	updated: string;
+	status: string;
 }
 
 export const load = (async ({ locals }) => {

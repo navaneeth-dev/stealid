@@ -18,8 +18,13 @@
 			cell: (info) => info.getValue()
 		},
 		{
+			accessorKey: 'status',
+			header: 'STATUS',
+			cell: (info) => info.getValue<string>().toUpperCase()
+		},
+		{
 			id: 'download',
-			header: 'Download',
+			header: 'DOWNLOAD',
 			cell: () => flexRender(DownloadBtn, {})
 		}
 	];
@@ -38,7 +43,7 @@
 	<h2 class="text-3xl font-bold py-6">Builder</h2>
 
 	<section>
-		<div class="flex justify-between">
+		<form class="flex justify-between" method="POST">
 			<div class="flex items-center">
 				<input
 					type="text"
@@ -54,9 +59,9 @@
 				<Box />
 				<span>Create Build</span>
 			</button>
-		</div>
+		</form>
 
-		<table class="w-full bg-neutral-800 rounded mt-3 font-mono">
+		<table class="w-full bg-neutral-800 rounded mt-3 font-mono table-fixed">
 			<thead>
 				{#each $table.getHeaderGroups() as headerGroup}
 					<tr>
