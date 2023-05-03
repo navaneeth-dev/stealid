@@ -6,10 +6,8 @@ export const actions = {
 	},
 	download: async (event) => {
 		const data = await event.request.formData();
-		const buildID = data.get('buildID');
+		const buildID = data.get('buildID') as string;
 		const record = await event.locals.pb.collection('builds').getOne(buildID);
-		console.log(record);
-
 		const fileToken = await event.locals.pb.files.getToken();
 		console.log(fileToken);
 		const url = event.locals.pb.files.getUrl(record, record.implant, { token: fileToken });
