@@ -55,7 +55,8 @@
 				</div> -->
 				<button
 					type="submit"
-					class="bg-neutral-800 text-white rounded p-2 hover:bg-neutral-600 font-bold">Login</button
+					class="bg-neutral-800 text-white rounded py-1 px-2 hover:bg-neutral-600 font-bold"
+					>Login</button
 				>
 			</form>
 			{#if $message}
