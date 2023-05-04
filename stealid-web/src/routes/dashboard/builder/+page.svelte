@@ -10,25 +10,36 @@
 	} from '@tanstack/svelte-table';
 	import type { Build } from './+page.server';
 	import DownloadBtn from '$lib/components/download.svelte';
+	import { format } from 'date-fns';
 
 	const defaultColumns: ColumnDef<Build>[] = [
 		{
 			accessorKey: 'id',
 			header: 'ID',
 			cell: (info) => info.getValue(),
-			size: 64
+			size: 150
 		},
 		{
 			accessorKey: 'status',
 			header: 'STATUS',
 			cell: (info) => info.getValue<string>().toUpperCase(),
-			size: 24
+			size: 100
+		},
+		{
+			accessorKey: 'created',
+			header: 'CREATED',
+			cell: (info) => format(new Date(info.getValue<string>()), 'dd-MMM-yyyy HH:mm:SS')
+		},
+		{
+			accessorKey: 'updated',
+			header: 'UPDATED',
+			cell: (info) => format(new Date(info.getValue<string>()), 'dd-MMM-yyyy HH:mm:SS')
 		},
 		{
 			id: 'download',
 			header: 'DOWNLOAD',
 			cell: (info) => flexRender(DownloadBtn, { buildID: info.row.getValue('id') }),
-			size: 24
+			size: 80
 		}
 	];
 
@@ -69,12 +80,15 @@
 			</button>
 		</form>
 
-		<table class="bg-neutral-800 rounded mt-3 font-mono">
+		<table class="bg-neutral-800 rounded mt-3 font-mono w-full">
 			<thead>
 				{#each $table.getHeaderGroups() as headerGroup}
 					<tr>
 						{#each headerGroup.headers as header}
-							<th class="uppercase font-normal text-sm text-left p-2 w-{header.getSize()}">
+							<th
+								class="uppercase font-normal text-sm text-left p-2 w-{header.getSize()}"
+								style="width: {header.getSize()}px;"
+							>
 								{#if !header.isPlaceholder}
 									<svelte:component
 										this={flexRender(header.column.columnDef.header, header.getContext())}
@@ -89,7 +103,7 @@
 				{#each $table.getRowModel().rows as row}
 					<tr>
 						{#each row.getVisibleCells() as cell}
-							<td class="p-2 text-base w-{cell.column.getSize()}">
+							<td class="p-2 text-base" style="width: {cell.column.getSize()}px;">
 								<svelte:component
 									this={flexRender(cell.column.columnDef.cell, cell.getContext())}
 								/>
