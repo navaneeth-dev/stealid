@@ -13,7 +13,10 @@ import (
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
 	"github.com/pocketbase/pocketbase/forms"
+	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 	"github.com/pocketbase/pocketbase/tools/filesystem"
+
+	_ "github.com/navaneeth-dev/stealid/stealid-pocketbase/migrations"
 )
 
 func main() {
@@ -26,6 +29,10 @@ func main() {
 			go createBuild(app, e.Record.GetId())
 		}
 		return nil
+	})
+
+	migratecmd.MustRegister(app, app.RootCmd, &migratecmd.Options{
+		Automigrate: true, // auto creates migration files when making collection changes
 	})
 
 	if err := app.Start(); err != nil {
