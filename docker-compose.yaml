@@ -1,28 +1,47 @@
 version: "3.8"
+networks:
+  traefiknet: {}
 services:
-  caddy:
-    image: caddy
-    restart: unless-stopped
+  reverse-proxy:
+    # The official v2 Traefik docker image
+    image: traefik:v2.10
+    # Enables the web UI and tells Traefik to listen to docker
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--entrypoints.web.address=:80"
+    networks:
+      - traefiknet
     ports:
+      # The HTTP port
       - "80:80"
-      - "443:443"
-      - "443:443/udp"
+      # The Web UI (enabled by --api.insecure=true)
+      - "8080:8080"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
   pocketbase:
     image: stealid-pocketbase
     build: ./stealid-pocketbase
-    ports:
-      - "8080:8080"
+    networks:
+      - traefiknet
     volumes:
       - ./data/pb_data:/pb/pb_data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pocketbase.rule=Host(`api.localhost`)"
+      - "traefik.http.routers.pocketbase.entrypoints=web"
+      - "traefik.http.middlewares.rate-limiter.ratelimit.average=100"
+      - "traefik.http.middlewares.rate-limiter.ratelimit.period=1s"
+      # - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
   web:
     image: stealid-web
     build: ./stealid-web
-    ports:
-      - "4173:4173"
+    networks:
+      - traefiknet
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.svelte.rule=Host(`test.localhost`)"
+      - "traefik.http.routers.svelte.entrypoints=web"
 
 volumes:
   caddy_data:
