@@ -30,9 +30,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.pocketbase.rule=Host(`api.localhost`)"
       - "traefik.http.routers.pocketbase.entrypoints=web"
-      - "traefik.http.middlewares.rate-limiter.ratelimit.average=100"
+      - "traefik.http.middlewares.rate-limiter.ratelimit.average=1000"
       - "traefik.http.middlewares.rate-limiter.ratelimit.period=1s"
-      # - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
+      - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
   web:
     image: stealid-web
     build: ./stealid-web
