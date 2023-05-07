@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  reverse-proxy:
+    image: traefik:v2.10
+    ports:
+      - "8080:8080"
+    command:
+      - "--api.insecure=true"
+      - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+  pocketbase:
+    environment:
+      - POCKET_BASE_URL=https://api.stealid.top
