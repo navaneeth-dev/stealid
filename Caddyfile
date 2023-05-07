@@ -1,4 +1,0 @@
-stealid.top {
-  reverse_proxy * web:4173
-}
-
