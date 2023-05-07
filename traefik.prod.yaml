@@ -1,0 +1,20 @@
+entryPoints:
+  web:
+    address: ':80'
+    redirections:
+      entryPoint:
+        to: websecure
+        scheme: https
+  websecure:
+    address: ':443'
+
+providers:
+  docker: {}
+
+certificatesResolvers:
+  myresolver:
+    acme:
+      email: ""
+      storage: acme.json
+      httpChallenge:
+        entryPoint: web
