@@ -42,6 +42,9 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.svelte.rule=Host(`test.localhost`)"
       - "traefik.http.routers.svelte.entrypoints=web"
+      - "traefik.http.middlewares.front-limiter.ratelimit.average=100"
+      - "traefik.http.middlewares.front-limiter.ratelimit.period=1s"
+      - "traefik.http.routers.svelte.middlewares=front-limiter@docker"
 
 volumes:
   caddy_data:
