@@ -8,10 +8,12 @@ services:
       - "--api.insecure=true"
       - "--providers.docker"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
     networks:
       - traefiknet
     ports:
       - "80:80"
+      - "443:443"
       # The Web UI (enabled by --api.insecure=true)
       - "8080:8080"
     volumes:
@@ -25,8 +27,8 @@ services:
       - ./data/pb_data:/pb/pb_data
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pocketbase.rule=Host(`api.localhost`)"
-      - "traefik.http.routers.pocketbase.entrypoints=web"
+      - "traefik.http.routers.pocketbase.rule=Host(`api.stealid.top`)"
+      - "traefik.http.routers.pocketbase.entrypoints=web,websecure"
       - "traefik.http.middlewares.rate-limiter.ratelimit.average=1000"
       - "traefik.http.middlewares.rate-limiter.ratelimit.period=1s"
       - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
@@ -37,8 +39,8 @@ services:
       - traefiknet
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.svelte.rule=Host(`test.localhost`)"
-      - "traefik.http.routers.svelte.entrypoints=web"
+      - "traefik.http.routers.svelte.rule=Host(`stealid.top`)"
+      - "traefik.http.routers.svelte.entrypoints=web,websecure"
       - "traefik.http.middlewares.front-limiter.ratelimit.average=100"
       - "traefik.http.middlewares.front-limiter.ratelimit.period=1s"
       - "traefik.http.routers.svelte.middlewares=front-limiter@docker"
