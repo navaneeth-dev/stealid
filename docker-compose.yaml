@@ -28,7 +28,10 @@ services:
       - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
   web:
     image: stealid-web
-    build: ./stealid-web
+    build:
+      context: ./stealid-web
+      args:
+        POCKET_BASE_URL: http://pocketbase:8080
     networks:
       - traefiknet
     labels:
@@ -39,4 +42,4 @@ services:
       - "traefik.http.middlewares.front-limiter.ratelimit.period=1s"
       - "traefik.http.routers.svelte.middlewares=front-limiter@docker"
     environment:
-      - POCKET_BASE_URL=http://${POCKET_BASE_URL}
+      - POCKET_BASE_URL=http://pocketbase:8080

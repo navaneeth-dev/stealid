@@ -1,5 +1,7 @@
 FROM docker.io/node as build
 
+ARG POCKET_BASE_URL
+
 WORKDIR /app
 
 RUN npm i -g pnpm
