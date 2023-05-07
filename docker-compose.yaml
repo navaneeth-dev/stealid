@@ -4,17 +4,13 @@ networks:
 services:
   reverse-proxy:
     image: traefik:v2.10
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
     networks:
       - traefiknet
     ports:
       - "80:80"
       - "443:443"
     volumes:
+      - "./data/letsencrypt:/letsencrypt"
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
   pocketbase:
     image: stealid-pocketbase

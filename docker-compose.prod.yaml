@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  reverse-proxy:
+    volumes:
+      - "./traefik.dev.yaml:/etc/traefik/traefik.yaml"
+  pocketbase:
+    labels:
+      - "traefik.http.routers.pocketbase.tls.certresolver=myresolver"
+  web:
+    labels:
+      - "traefik.http.routers.svelte.tls.certresolver=myresolver"
