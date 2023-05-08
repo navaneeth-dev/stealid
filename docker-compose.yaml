@@ -22,7 +22,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pocketbase.entrypoints=web,websecure"
-      - "traefik.http.routers.pocketbase.rule=Host(`${POCKET_BASE_URL}`) || (Host(`${WEB_URL}`) && PathPrefix(`/api`))"
+      - "traefik.http.routers.pocketbase.rule=Host(`${POCKET_BASE_DOMAIN}`) || (Host(`${WEB_URL}`) && PathPrefix(`/api`))"
       - "traefik.http.middlewares.rate-limiter.ratelimit.average=1000"
       - "traefik.http.middlewares.rate-limiter.ratelimit.period=1s"
       - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
@@ -31,7 +31,7 @@ services:
     build:
       context: ./stealid-web
       args:
-        POCKET_BASE_URL: http://pocketbase:8080
+        POCKET_BASE_URL: http://${WEB_URL}
     networks:
       - traefiknet
     labels:
@@ -42,4 +42,4 @@ services:
       - "traefik.http.middlewares.front-limiter.ratelimit.period=1s"
       - "traefik.http.routers.svelte.middlewares=front-limiter@docker"
     environment:
-      - POCKET_BASE_URL=http://pocketbase:8080
+      - POCKET_BASE_URL=http://${WEB_URL}
