@@ -22,7 +22,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pocketbase.entrypoints=web,websecure"
-      - "traefik.http.routers.pocketbase.rule=Host(`${POCKET_BASE_URL}`)"
+      - "traefik.http.routers.pocketbase.rule=Host(`${POCKET_BASE_URL}`) || (Host(`${WEB_URL}`) && PathPrefix(`/api`))"
       - "traefik.http.middlewares.rate-limiter.ratelimit.average=1000"
       - "traefik.http.middlewares.rate-limiter.ratelimit.period=1s"
       - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
