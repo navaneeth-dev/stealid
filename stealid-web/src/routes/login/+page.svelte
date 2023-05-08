@@ -11,12 +11,12 @@
 		<div class="w-1/2 text-center">
 			<h2 class="text-3xl font-bold">Login</h2>
 			<form method="POST" class="mt-8 flex flex-col gap-6">
-				<div class="flex flex-col gap-1 text-left">
+				<div class="flex flex-col gap-2 text-left">
 					<label for="username">Username:</label>
 					<input
 						type="text"
 						id="username"
-						class="border border-neutral-400 focus:border-white bg-transparent rounded p-2 outline-none"
+						class="bg-neutral-700 border border-neutral-400 placeholder:text-neutral-500 ring-neutral-500 focus:ring rounded py-1 px-2 outline-none"
 						autocomplete="off"
 						placeholder="abc"
 						name="username"
@@ -27,12 +27,12 @@
 						<small class="text-red-500">{$errors.username}</small>
 					{/if}
 				</div>
-				<div class="flex flex-col gap-1 text-left">
+				<div class="flex flex-col gap-2 text-left">
 					<label for="password">Password:</label>
 					<input
 						type="password"
 						id="password"
-						class="border border-neutral-400 focus:border-white bg-transparent rounded p-2 outline-none"
+						class="bg-neutral-700 border border-neutral-400 placeholder:text-neutral-500 ring-neutral-500 focus:ring rounded py-1 px-2 outline-none"
 						autocomplete="off"
 						placeholder="***"
 						name="password"
@@ -55,7 +55,7 @@
 				</div> -->
 				<button
 					type="submit"
-					class="bg-neutral-800 text-white rounded py-1 px-2 hover:bg-neutral-600 font-bold"
+					class="mt-2 bg-neutral-800 text-white rounded py-1 px-2 font-bold hover:ring ring-neutral-500"
 					>Login</button
 				>
 			</form>
