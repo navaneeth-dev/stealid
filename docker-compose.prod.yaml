@@ -12,3 +12,5 @@ services:
     labels:
       - "traefik.http.routers.svelte.tls=true"
       - "traefik.http.routers.svelte.tls.certresolver=myresolver"
+    environment:
+      - ORIGIN=https://${POCKET_BASE_URL}
