@@ -22,4 +22,4 @@ COPY --from=build /app .
 
 ENV HOST=0.0.0.0
 EXPOSE 4173
-CMD ["npm","run", "preview","--", "--host", "0.0.0.0"]
+CMD ["pnpm","run", "preview","--", "--host", "0.0.0.0"]
