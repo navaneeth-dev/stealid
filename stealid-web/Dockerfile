@@ -20,6 +20,8 @@ FROM docker.io/node
 WORKDIR /app
 COPY --from=build /app .
 
+# run prod from build folder
 ENV HOST=0.0.0.0
+ENV PORT=4173
 EXPOSE 4173
-CMD ["pnpm","run", "preview","--", "--host", "0.0.0.0"]
+CMD ["node","build"]
