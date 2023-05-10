@@ -9,6 +9,12 @@ services:
       - "traefik.http.routers.pocketbase.tls=true"
       - "traefik.http.routers.pocketbase.tls.certresolver=myresolver"
   web:
+    build:
+      context: ./stealid-web
+      args:
+        POCKET_BASE_URL: https://${WEB_URL}
     labels:
       - "traefik.http.routers.svelte.tls=true"
       - "traefik.http.routers.svelte.tls.certresolver=myresolver"
+    environment:
+      - POCKET_BASE_URL=https://${WEB_URL}
