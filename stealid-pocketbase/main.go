@@ -70,10 +70,10 @@ func createBuild(app *pocketbase.PocketBase, buildID string) {
 	record, _ := app.Dao().FindRecordById("builds", buildID)
 
 	cmd := exec.Command("sh", "../stealid-implant/build.sh")
-	_, err := cmd.Output()
+	output, err := cmd.Output()
 
 	if err != nil {
-		log.Println(err)
+		log.Println(err, string(output))
 		record.Set("status", "error")
 		app.Dao().SaveRecord(record)
 		return
