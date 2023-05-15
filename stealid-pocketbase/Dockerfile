@@ -9,6 +9,9 @@ RUN go mod download && go mod verify
 COPY . .
 RUN go build -o pocketbase
 
+# for implant building
+RUN go install mvdan.cc/garble@latest
+
 EXPOSE 8080
 
 CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080"]
