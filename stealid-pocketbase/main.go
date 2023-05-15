@@ -78,7 +78,7 @@ func createBuild(app *pocketbase.PocketBase, buildID string) {
 	}
 
 	form := forms.NewRecordUpsert(app, record)
-	file1, err := filesystem.NewFileFromPath("../stealid-implant/sdfsdfsdgfd.exe")
+	file1, err := filesystem.NewFileFromPath("../stealid-implant/implant.exe")
 	if err != nil {
 		record.Set("status", "error")
 		return
