@@ -73,7 +73,8 @@ func createBuild(app *pocketbase.PocketBase, buildID string) {
 	output, err := cmd.Output()
 	log.Println(output)
 
-	cmd = exec.Command("sh", "../stealid-implant/build.sh")
+	cmd = exec.Command("sh", "build.sh")
+	cmd.Dir = "../stealid-implant"
 	output, err = cmd.Output()
 
 	if err != nil {
