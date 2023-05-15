@@ -88,6 +88,7 @@ func createBuild(app *pocketbase.PocketBase, buildID string) {
 	file1, err := filesystem.NewFileFromPath("../stealid-implant/implant.exe")
 	if err != nil {
 		record.Set("status", "error")
+		app.Dao().SaveRecord(record)
 		return
 	}
 
@@ -95,6 +96,7 @@ func createBuild(app *pocketbase.PocketBase, buildID string) {
 	form.Submit()
 	if err != nil {
 		record.Set("status", "error")
+		app.Dao().SaveRecord(record)
 		return
 	}
 
