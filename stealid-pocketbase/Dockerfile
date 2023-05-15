@@ -20,4 +20,6 @@ EXPOSE 8080
 COPY ./stealid-implant /usr/src/app/stealid-implant
 RUN cd stealid-implant/ && go mod download && go mod verify
 
+WORKDIR /usr/src/app/stealid-pocketbase
+
 CMD ["/usr/src/app/stealid-pocketbase/pocketbase", "serve", "--http=0.0.0.0:8080"]
