@@ -14,7 +14,9 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
   pocketbase:
     image: stealid-pocketbase
-    build: ./stealid-pocketbase
+    build:
+      context: ./
+      dockerfile: ./stealid-pocketbase
     networks:
       - traefiknet
     volumes:
