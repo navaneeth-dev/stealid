@@ -73,8 +73,9 @@ func createBuild(app *pocketbase.PocketBase, buildID string) {
 	_, err := cmd.Output()
 
 	if err != nil {
-		record.Set("status", "error")
 		log.Println(err)
+		record.Set("status", "error")
+		app.Dao().SaveRecord(record)
 		return
 	}
 
@@ -95,6 +96,5 @@ func createBuild(app *pocketbase.PocketBase, buildID string) {
 	// TODO: read file bytes and set out
 
 	record.Set("status", "success")
-
 	app.Dao().SaveRecord(record)
 }
