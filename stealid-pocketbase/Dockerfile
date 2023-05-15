@@ -1,4 +1,4 @@
-FROM docker.io/golang:latest
+FROM docker.io/golang:1.20
 
 WORKDIR /pb
 
