@@ -20,7 +20,7 @@ services:
     networks:
       - traefiknet
     volumes:
-      - ./data/pb_data:/pb/pb_data
+      - ./data/pb_data:/usr/src/app/stealid-pocketbase/pb_data
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.pocketbase.entrypoints=web,websecure"
