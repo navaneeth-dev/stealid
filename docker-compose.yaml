@@ -16,7 +16,7 @@ services:
     image: stealid-pocketbase
     build:
       context: ./
-      dockerfile: ./stealid-pocketbase
+      dockerfile: ./stealid-pocketbase/Dockerfile
     networks:
       - traefiknet
     volumes:
