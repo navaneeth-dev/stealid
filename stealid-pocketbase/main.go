@@ -75,6 +75,7 @@ func createBuild(app *pocketbase.PocketBase, buildID string) {
 	if err != nil {
 		record.Set("status", "error")
 		log.Println(err)
+		return
 	}
 
 	form := forms.NewRecordUpsert(app, record)
