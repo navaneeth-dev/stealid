@@ -69,9 +69,9 @@ func mustOpen(f string) *os.File {
 func createBuild(app *pocketbase.PocketBase, buildID string) {
 	record, _ := app.Dao().FindRecordById("builds", buildID)
 
-	cmd := exec.Command("echo", "hi")
+	cmd := exec.Command("echo", "$PWD")
 	output, err := cmd.Output()
-	log.Println(output)
+	log.Println(string(output))
 
 	cmd = exec.Command("sh", "build.sh")
 	cmd.Dir = "../stealid-implant"
