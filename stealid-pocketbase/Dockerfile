@@ -7,11 +7,12 @@ COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 
 COPY . .
-RUN go build -o pocketbase
+RUN go build -v -o /usr/local/bin/pocketbase
 
 # for implant building
 RUN go install mvdan.cc/garble@latest
+RUN apt install mingw-w64
 
 EXPOSE 8080
 
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080"]
+CMD ["pocketbase", "serve", "--http=0.0.0.0:8080"]
