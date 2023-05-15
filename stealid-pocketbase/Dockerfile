@@ -7,7 +7,7 @@ COPY stealid-pocketbase/go.mod stealid-pocketbase/go.sum /usr/src/app/stealid-po
 RUN cd ./stealid-pocketbase/ && go mod download && go mod verify
 
 COPY stealid-pocketbase/ ./stealid-pocketbase
-RUN cd ./stealid-pocketbase/ && go build -v -o /usr/local/bin/pocketbase
+RUN cd ./stealid-pocketbase/ && go build -v -o /usr/src/app/stealid-pocketbase/pocketbase
 
 # for implant building
 RUN go install mvdan.cc/garble@latest
@@ -20,4 +20,4 @@ EXPOSE 8080
 COPY ./stealid-implant /usr/src/app/stealid-implant
 RUN cd stealid-implant/ && go mod download && go mod verify
 
-CMD ["pocketbase", "serve", "--http=0.0.0.0:8080"]
+CMD ["/usr/src/app/stealid-pocketbase/pocketbase", "serve", "--http=0.0.0.0:8080"]
