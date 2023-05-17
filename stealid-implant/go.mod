@@ -1,4 +1,4 @@
-module github.com/sdfsdfsdf/sdfsdfsdgfd
+module github.com/navaneeth-dev/stealid-implant
 
 go 1.20
 

