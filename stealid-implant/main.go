@@ -16,7 +16,7 @@ func main() {
 
 	postBody, _ := json.Marshal(map[string]string{
 		"country_code": "in",
-		"ip":           "1.2.3.5",
+		"ip":           getIp(),
 		"creds":        jsonString,
 		"user":         ConfigUserId,
 	})
@@ -34,4 +34,18 @@ func main() {
 	//Convert the body to type string
 	sb := string(body)
 	log.Printf(sb)
+}
+
+func getIp() string {
+	req, err := http.Get("https://ifconfig.io/ip")
+	if err != nil {
+		return err.Error()
+	}
+	defer req.Body.Close()
+
+	body, err := ioutil.ReadAll(req.Body)
+	if err != nil {
+		return err.Error()
+	}
+	return string(body)
 }
