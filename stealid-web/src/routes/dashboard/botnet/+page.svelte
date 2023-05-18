@@ -34,9 +34,9 @@
 			cell: (info) => format(new Date(info.getValue<string>()), 'dd-MMM-yyyy HH:mm:SS')
 		},
 		{
-			id: 'view',
+			accessorKey: 'creds',
 			header: 'View',
-			cell: () => flexRender(View, {})
+			cell: (info) => flexRender(View, { creds: info.getValue() })
 		}
 	];
 

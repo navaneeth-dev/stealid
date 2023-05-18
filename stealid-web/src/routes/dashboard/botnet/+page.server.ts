@@ -5,6 +5,7 @@ export interface Bot {
 	country_code: string;
 	ip: string;
 	created: string;
+	creds: string;
 }
 
 export const load = (async ({ locals }) => {
