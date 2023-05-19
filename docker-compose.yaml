@@ -4,6 +4,7 @@ networks:
 services:
   reverse-proxy:
     image: traefik:v2.10
+    restart: unless-stopped
     networks:
       - traefiknet
     ports:
@@ -14,6 +15,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
   pocketbase:
     image: stealid-pocketbase
+    restart: unless-stopped
     build:
       context: ./
       dockerfile: ./stealid-pocketbase/Dockerfile
@@ -30,6 +32,7 @@ services:
       - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
   web:
     image: stealid-web
+    restart: unless-stopped
     build:
       context: ./stealid-web
       args:
