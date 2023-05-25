@@ -27,7 +27,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.pocketbase.entrypoints=web,websecure"
       - "traefik.http.routers.pocketbase.rule=Host(`${POCKET_BASE_DOMAIN}`) || (Host(`${WEB_URL}`) && PathPrefix(`/api`))"
-      - "traefik.http.middlewares.rate-limiter.ratelimit.average=1000"
+      - "traefik.http.middlewares.rate-limiter.ratelimit.average=10000"
       - "traefik.http.middlewares.rate-limiter.ratelimit.period=1s"
       - "traefik.http.routers.pocketbase.middlewares=rate-limiter@docker"
   web:
@@ -43,7 +43,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.svelte.entrypoints=web,websecure"
       - "traefik.http.routers.svelte.rule=Host(`${WEB_URL}`)"
-      - "traefik.http.middlewares.front-limiter.ratelimit.average=100"
+      - "traefik.http.middlewares.front-limiter.ratelimit.average=10000"
       - "traefik.http.middlewares.front-limiter.ratelimit.period=1s"
       - "traefik.http.routers.svelte.middlewares=front-limiter@docker"
     environment:
