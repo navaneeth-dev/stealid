@@ -1,6 +1,10 @@
 # StealID
 
-Complete Stealer As A Service
+Cookie Stealer As A Service.
+
+## Deploying
+
+`make` it uses docker compose.
 
 ## TODO
 
