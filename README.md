@@ -2,7 +2,7 @@
 
 Cookie Stealer As A Service.
 
-![banner img](https://github.com/navaneeth-dev/stealid/blob/main/stealid-preview.png?raw=true)
+![banner img](https://github.com/navaneeth-dev/stealid/blob/main/assets/stealid-preview.png?raw=true)
 
 ## Deploying
 
