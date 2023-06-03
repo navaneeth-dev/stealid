@@ -8,6 +8,17 @@ Cookie Stealer As A Service.
 
 `make` it uses docker compose.
 
+## Contributing
+
+Requirements:
+
+- golang 1.18
+- pnpm
+- cmake
+- mingw-w64
+
+Install all these dev dependencies and start contributing.
+
 ## TODO
 
 - [ ] Make docker compose only for production and manual install for development
